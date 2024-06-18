@@ -1,0 +1,17 @@
+import pandas as pd
+import random
+
+# Генерация данных
+lst = ['robot'] * 10
+lst += ['human'] * 10
+random.shuffle(lst)
+data = pd.DataFrame({'whoAmI': lst})
+
+# Создание one-hot кодирования
+data['robot'] = (data['whoAmI'] == 'robot').astype(int)
+data['human'] = (data['whoAmI'] == 'human').astype(int)
+
+# Удаление исходного столбца
+data = data.drop('whoAmI', axis=1)
+
+print(data.head())
